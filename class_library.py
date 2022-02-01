@@ -30,6 +30,8 @@ class Game:
 
     def check_balls(self):
         if self.player.pyballs == 0:
+            print("Game Over! You've used all of your balls.")
+            print("In this gameplay, you were able to catch {total} Pymons in total.".format(total = sum(self.player.pymons.values())))
             return False
         else:
             pass
