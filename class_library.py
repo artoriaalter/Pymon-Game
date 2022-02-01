@@ -1,4 +1,39 @@
 import random
+class Game:
+    def __init__(self, player):
+        self.player = player
+
+    def game_start(self):
+        while True:
+            print("What do you want to do?")
+            print("""
+            1. Catch a Pymon
+            2. View your status
+            3. Quit the gam
+            """)
+            choice = int(input())
+
+            if choice == 1:
+                self.player.catch_pymon()
+
+                if self.check_balls() == False:
+                    break
+
+            elif choice == 2:
+                print(self.player)
+
+            elif choice == 3:
+                print("See you soon!")
+                break
+            else:
+                print("Invalid input!")
+
+    def check_balls(self):
+        if self.player.pyballs == 0:
+            return False
+        else:
+            pass
+
 
 class Player:
     def __init__(self, name):
@@ -13,14 +48,14 @@ class Player:
         Current Pymons are given below:
         """.format(name=self.name, level = self.level, pyball = self.pyballs)
 
-        for pymon, number in self.pymons:
+        for pymon, number in self.pymons.items():
             player_description += "\n{pymon}: {number}\n".format(pymon=pymon, number = number)
 
         return player_description
 
     def catch_pymon(self):
         possibility_randomizer = random.randint(1,5)
-        level_randomizer = random.randint(1, self.level + 4)
+        level_randomizer = random.randint(1, self.level + 2)
         possible_pymons = ["Gitmon","Atommon","Codecademymon","Bugmon"]
         pymon = Pymon(random.choice(possible_pymons), level_randomizer)
         print("{name} threw his ball to catch a {pymon}...".format(name = self.name, pymon = pymon ))
